@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: hybrid-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: hybrid
+      POSTGRES_PASSWORD: hybrid
+      POSTGRES_DB: hybrid_auth
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mongo:
+    image: mongo:7
+    container_name: hybrid-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: hybrid-rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5672:5672"   # AMQP
+      - "15672:15672" # management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: hybrid
+      RABBITMQ_DEFAULT_PASS: hybrid
+
+  opa:
+    image: openpolicyagent/opa:latest-envoy
+    container_name: hybrid-opa
+    restart: unless-stopped
+    command:
+      - "run"
+      - "--server"
+      - "--addr=0.0.0.0:8181"
+      - "/policies"
+    ports:
+      - "8181:8181"
+    volumes:
+      - ./policies:/policies
+
+volumes:
+  postgres_data:
+  mongo_data:

@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Database
+*.sqlite
+
+# Docker volumes (local data)
+infra/docker/volumes/
+
+# Test coverage
+coverage/
+
+# Drizzle generated migrations metadata (keep migrations, ignore meta cache if needed)
+# apps/monolith/src/db/migrations/meta/

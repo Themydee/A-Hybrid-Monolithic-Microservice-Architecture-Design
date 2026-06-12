@@ -1,0 +1,32 @@
+{
+  "name": "hybrid-auth-system",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Hybrid monolithic-microservice web application with centralized authorization and distributed enforcement",
+  "workspaces": [
+    "apps/*",
+    "apps/microservices/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:infra": "docker compose -f infra/docker/docker-compose.yml up -d",
+    "dev:infra:down": "docker compose -f infra/docker/docker-compose.yml down",
+    "dev:monolith": "npm run start:dev --workspace=apps/monolith",
+    "dev:gateway": "npm run start:dev --workspace=apps/gateway",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:audit-log": "npm run start:dev --workspace=apps/microservices/audit-log",
+    "dev:notifications": "npm run start:dev --workspace=apps/microservices/notifications",
+    "dev:user-profile": "npm run start:dev --workspace=apps/microservices/user-profile",
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "db:generate": "npm run db:generate --workspace=apps/monolith",
+    "db:migrate": "npm run db:migrate --workspace=apps/monolith",
+    "opa:test": "opa test policies/ -v",
+    "opa:fmt": "opa fmt policies/ --write"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}
