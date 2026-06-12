@@ -306,10 +306,4 @@ Each app's `.env.example` documents its required variables. Common ones:
 | `LOCKOUT_THRESHOLD` | Failed attempts before account lockout (default 5) |
 | `LOCKOUT_DURATION_MINUTES` | Lockout duration (default 15) |
 
----
 
-## Related Documents
-
-- **Chapter 2** — Literature review and identified research gap
-- **Chapter 3** — System analysis, design, requirements, and evaluation framework
-- **Chapter 4** — Implementation results and evaluation against the metrics in Section 3.5
