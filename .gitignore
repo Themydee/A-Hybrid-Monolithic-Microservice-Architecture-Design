@@ -38,3 +38,6 @@ coverage/
 
 # Drizzle generated migrations metadata (keep migrations, ignore meta cache if needed)
 # apps/monolith/src/db/migrations/meta/
+
+# Private keys
+*.pem
